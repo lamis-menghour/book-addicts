@@ -1,0 +1,37 @@
+.icons-container {
+  // background-color: var(--background-light);
+  // margin-top: 5px;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 1rem;
+  box-shadow: 0px 0px 10px var(--shadow-color);
+
+  .icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2em 1em;
+
+    svg {
+      color: var(--dark-green);
+      font-size: 2rem;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h3 {
+        font-size: 1.5em;
+        color: var(--text-color);
+      }
+      p {
+        color: var(--text-light);
+        font-size: 0.9em;
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+.book-details {
+  margin-inline: 5vw;
+  margin-top: 15vh;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: var(--background-color);
+  height: 80vh;
+  direction: rtl;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0px 0px 5px var(--shadow-color);
+
+  .book-cover {
+    height: 80vh;
+    padding-block: 5vh;
+    img {
+      height: 100%;
+  box-shadow: 0px 0px 5px var(--shadow-color);
+}
+  }
+
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding-block: 10vh;
+    padding-inline: 5vw;
+    .book-title {
+      font-size: 2.5em;
+      color: var(--text-color);
+    }
+    .book-author {
+      font-size: 1.2em;
+      color: var(--text-light);
+    }
+    .book-dscrp {
+      font-size: 1.1em;
+      width: 90%;
+      text-align: justify;
+      color: var(--text-color);
+    }
+    .book-pages-reviews {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+      color: var(--text-light);
+
+      .book-pages {
+        font-size: 1.1em;
+      }
+      .book-reviews {
+        font-size: 1em;
+      }
+    }
+
+    .book-price {
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .book-price-quantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        color: var(--text-color);
+        .total-price {
+          font-size: 1.5em;
+        }
+
+        .quantity {
+          border-radius: 15px;
+          box-shadow: 0px 0px 5px var(--shadow-color);
+background-color: transparent;
+          padding: 0 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          font-size: 1.2em;
+
+          .minus:hover,
+          .plus:hover {
+            cursor: pointer;
+            color: var(--green);
+          }
+          .number {
+            font-size: 1.2em;
+          }
+        }
+      }
+
+      .add-to-cart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        color: var(--text-color);
+
+        svg {
+          font-size: 1.2em;
+          &:hover {
+            cursor: pointer;
+            color: var(--green);
+          }
+        }
+      }
+    }
+  }
+}

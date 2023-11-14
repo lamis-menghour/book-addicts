@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;1000&display=swap");
+
+// CSS Variables
+:root {
+  --background-color: #ffffff;
+  --background-light: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --text-color: #0a0a0a;
+  --text-light: #575757;
+  --green: #bfc504;
+  --dark-green: #6a6d00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "El Messiri", sans-serif;
+  background-color: var(--background-light);
+  margin-top: 55px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.ar {
+  direction: rtl;
+  align-items: flex-end;
+}
+
+.btn {
+  font-family: "El Messiri", sans-serif;
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.6rem 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: 1.4rem;
+  background-color: var(--green);
+
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    background-color: var(--dark-green);
+    color: var(--green);
+    color: white;
+  }
+}
+
+@import "./partials/animation";
+@import "./partials/navbar";
+@import "./partials/login";
+@import "./partials/hero-Section";
+@import "./partials/bar-Section";
+@import "./partials/featured-books-Section";
+@import "./partials/book-Section";
+@import "./partials/book-Details";
+@import "./partials/cart-Section";
+@import "./partials/sidebar-Section";
+@import "./partials/checkOut-Form";
+@import "./partials/newsletter-section";
+// ------------------------------------------
+
+@media screen and (max-width: 1280px) {
+  .hero-section {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .hero-section {
+    height: 80vh;
+    padding: 3rem 2rem;
+  }
+  .shelf {
+    right: 10%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    margin-top: 0;
+    margin-bottom: 100px;
+  }
+  .sidebar {
+    top: 0;
+  }
+
+  .navbar {
+    display: none;
+  }
+  .bottom-navbar {
+    display: flex;
+  }
+
+  .hero-section {
+    height: 100%;
+    flex-direction: column;
+    gap: 50px;
+    .content {
+      width: 90%;
+    }
+    #swiper-stand {
+      width: 80%;
+      .books-swiper {
+        .swiper-slide {
+          height: 20rem;
+        }
+      }
+    }
+  }
+  .featured-books {
+    .featured-books-container {
+      .books-swiper {
+        width: 40vw;
+
+      }
+    }
+  }
+
+  .icons-container {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .shelf {
+    transform: translateX(0%);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .books-shelf {
+    width: 100vw;
+  }
+  .icons-container {
+    grid-template-columns: auto;
+  }
+}

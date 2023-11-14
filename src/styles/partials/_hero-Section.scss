@@ -1,0 +1,63 @@
+.hero-section {
+  width: 100vw;
+  padding: 5rem 8%;
+  background: url(../../../public/img/banner-bg.jpg) no-repeat;
+  // background: url(../../../public/img/heroSection.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  .content {
+    width: 45%;
+    h3 {
+      // color: var(--text-color);
+      font-size: 3rem;
+    }
+    p {
+      // color: var(--text-light);
+      font-size: 1.2rem;
+      line-height: 2;
+      padding: 1rem 0;
+      text-align: justify;
+      width: 90%;
+    }
+  }
+
+  #swiper-stand {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .books-swiper {
+      width: 100%;
+      padding: 10px;
+
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        height: 14rem;
+
+        img {
+          box-shadow: -3px 3px 5px var(--shadow-color);
+          object-fit: cover;
+        }
+        &:hover {
+          transform: scale(0.9);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .stand {
+      width: 120%;
+      height: 100%;
+      margin-top: 10px;
+    }
+  }
+}

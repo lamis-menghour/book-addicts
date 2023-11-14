@@ -1,0 +1,54 @@
+form.checkOut-form {
+  padding-inline: 10vw;
+  padding-block: 10vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background-color: var(--background-color);
+
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(255px, 1fr));
+    row-gap: 20px;
+    column-gap: 20px;
+    direction: rtl;
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      gap: 5px;
+
+      label {
+        font-size: 1.2em;
+        color: var(--text-color);
+      }
+
+      input {
+        font-size: 1.2em;
+        padding: 5px;
+        outline: none;
+      }
+      input:hover,
+      input:focus {
+        border: 2px solid var(--dark-green);
+      }
+    }
+  }
+  
+  button {
+    font-size: 1.2em;
+    background-color: var(--dark-green);
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-top: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
