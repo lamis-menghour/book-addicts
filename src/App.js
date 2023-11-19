@@ -13,22 +13,25 @@ import Favorite from "./pges/Favorite";
 import Login from "./pges/Login";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import { FavoriteItemsProvider } from "./context/FavoriteItemsContext";
+import { BookDetailsProvider } from "./context/BookDetailsContext";
 
 function App() {
   return (
     <ShoppingCartProvider>
       <FavoriteItemsProvider>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/كتبنا" element={<OurBooks />} />
-          <Route path="/إقرأ-المزيد" element={<BookDetails />} />
-          <Route path="/المفضلة" element={<Favorite />} />
-          <Route path="/مشترياتي" element={<Cart />} />
-          <Route path="/checkOut" element={<CheckOut />} />
-        </Routes>
-        <Footer />
-        <BottomNavbar />
+        <BookDetailsProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/كتبنا" element={<OurBooks />} />
+            <Route path="/إقرأ-المزيد" element={<BookDetails  link={"/كتبنا"}/>} />
+            <Route path="/المفضلة" element={<Favorite />} />
+            <Route path="/مشترياتي" element={<Cart />} />
+            <Route path="/checkOut" element={<CheckOut />} />
+          </Routes>
+          {/* <Footer /> */}
+          {/* <BottomNavbar /> */}
+        </BookDetailsProvider>
       </FavoriteItemsProvider>
     </ShoppingCartProvider>
   );

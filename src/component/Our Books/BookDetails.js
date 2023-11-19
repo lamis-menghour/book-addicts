@@ -1,68 +1,118 @@
-import React from "react";
+import { React, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faShoppingCart, faClose } from "@fortawesome/free-solid-svg-icons";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useFavoriteIcon } from "../../context/FavoriteItemsContext";
 import books from "../../dataBase/data";
+import { useBookDetails } from "../../context/BookDetailsContext";
+{
+}
+function BookDetails({ link }) {
+  const {
+    getItemQuantity,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    cartItems,
+  } = useShoppingCart();
+  const { addToFavorites, favoriteItems } = useFavoriteIcon();
+  const { selectedBookId, closeBookDetails } = useBookDetails();
+  const quantity = getItemQuantity(selectedBookId) || 1;
 
-function BookDetails({ id }) {
-  const [getItemQuantity, increaseItemQuantity, decreaseItemQuantity] =
-    useShoppingCart();
-  const { addToFavorite } = useFavoriteIcon();
+  // Use the 'id' parameter instead of the outer 'item' variable
+  const BOOK = books.find((book) => book.id === selectedBookId);
 
-  // // Use the 'id' parameter instead of the outer 'item' variable
-  const BOOK = books.find((book) => book.id === id);
-  if (!BOOK) return <p>لم يتم العثور على الكتاب</p>;
+  const isItemFavorite = favoriteItems.some(
+    (item) => item.id === selectedBookId
+  );
+  const isItemCart = cartItems.some((item) => item.id === selectedBookId);
+
+  const [isHeartHovered, setHeartHovered] = useState(false);
+  const [isCartHovered, setCartHovered] = useState(false);
+
+  const heartStyle = {
+    color: isItemFavorite ? "red" : "var(--text-color)",
+    ...(isHeartHovered && { color: "red" }),
+  };
+  const shoppingCartStyle = {
+    color: isItemCart ? "var(--green)" : "var(--text-color)",
+    ...(isCartHovered && { color: "var(--green)" }),
+  };
 
   return (
-    <div className="book-details">
-      <div className="book-cover">
-        <img src={`/img/${BOOK.title}.JPG`} alt={`${BOOK.title} cover`} />
-      </div>
-      <div className="book-info">
-        <h3 className="book-title">{BOOK.title}</h3>
-        <p className="book-author">{BOOK.author}</p>
-        <p className="book-dscrp">{BOOK.dscrp}</p>
-        <div className="book-pages-reviews">
-          <span className="book-pages">{BOOK.pages} صفحة</span>
-          <span className="book-reviews">({BOOK.reviews})</span>
-        </div>
-
-        <p className="book-price">
-          <div className="book-price-quantity">
-            <span className="total-price">{BOOK.price} دج </span>
-            <span className="quantity">
-              <span
-                className="minus"
-                onClick={() => decreaseItemQuantity(BOOK.id)}
-              >
-                -
-              </span>
-              <span className="number">{getItemQuantity(BOOK.id)}</span>
-              <span
-                className="plus"
-                onClick={() => increaseItemQuantity(BOOK.id)}
-              >
-                +
-              </span>
-            </span>
+    <div className="book-details-section">
+      {!BOOK ? (
+        <p className="empty">لم يتم العثور على الكتاب</p>
+      ) : (
+        <div className="book-details">
+          <div className="book-details-cover">
+            <img src={`/img/${BOOK.title}.JPG`} alt={`${BOOK.title} cover`} />
           </div>
+          <div className="book-details-info">
+            <h3 className="book-details-title">{BOOK.title}</h3>
+            <p className="book-details-author">{BOOK.author}</p>
+            <p className="book-details-dscrp">{BOOK.dscrp}</p>
+            <div className="book-details-pages-reviews">
+              <span className="book-details-pages">{BOOK.pages} صفحة</span>
+              <span className="book-details-reviews">({BOOK.reviews}21)</span>
+            </div>
 
-          <span className="add-to-cart">
-            <FontAwesomeIcon
-              icon={faHeart}
-              className="liked"
-              onClick={() => addToFavorite(BOOK.id)}
-            />
-            <FontAwesomeIcon
-              icon={faShoppingCart}
-              className="add-to-cart"
-              onClick={() => increaseItemQuantity(BOOK.id)}
-            />
-          </span>
-        </p>
-      </div>
+            <p className="book-details-price">
+              <div className="book-details-price-quantity">
+                <span className="total-price">{BOOK.price * quantity} دج </span>
+                <span className="quantity">
+                  <span
+                    className="minus"
+                    onClick={() => decreaseItemQuantity(BOOK.id)}
+                  >
+                    -
+                  </span>
+                  <span className="number">{quantity}</span>
+                  <span
+                    className="plus"
+                    onClick={() => increaseItemQuantity(BOOK.id)}
+                  >
+                    +
+                  </span>
+                </span>
+              </div>
+
+              <span className="add-to-cart">
+                <FontAwesomeIcon
+                  icon={isItemFavorite ? faHeartSolid : faHeartRegular}
+                  style={heartStyle}
+                  className="liked"
+                  onClick={() => addToFavorites(BOOK.id)}
+                  onMouseEnter={() => setHeartHovered(true)}
+                  onMouseLeave={() => setHeartHovered(false)}
+                />
+
+                <div className="shopping-cart-quantity">
+                  {isItemCart && quantity >0  ? <p className="quantity">{quantity}</p> : null}
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    style={shoppingCartStyle}
+                    className="shopping-cart"
+                    onClick={() =>
+                      quantity === 1
+                        ? increaseItemQuantity(BOOK.id)
+                        : getItemQuantity(BOOK.id)
+                    }
+                    onMouseEnter={() => setCartHovered(true)}
+                    onMouseLeave={() => setCartHovered(false)}
+                  />
+                </div>
+              </span>
+            </p>
+          </div>
+          <div className="close">
+            <a href={link} onClick={closeBookDetails}>
+              <FontAwesomeIcon icon={faClose} />
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

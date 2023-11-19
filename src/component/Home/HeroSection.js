@@ -1,4 +1,5 @@
-import React from "react";
+import { React } from "react";
+import { useBookDetails } from "../../context/BookDetailsContext";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,11 +11,10 @@ import { Autoplay } from "swiper/modules";
 
 import books from "../../dataBase/data";
 
-function HeroSection() {
+function HeroSection({ handleClick }) {
   const sortedBooks = [...books].sort((a, b) => b.price - a.price);
   const top10Books = sortedBooks.slice(0, 10); // Select the first 10 books
-  console.log("sortedBooks ----- ", sortedBooks);
-  console.log("top10Books ----- ", top10Books);
+  const { openBookDetails } = useBookDetails();
 
   return (
     <div className="hero-section ar">
@@ -53,7 +53,13 @@ function HeroSection() {
           className="books-swiper"
         >
           {top10Books.map((book) => (
-            <SwiperSlide className="swiper-slide">
+            <SwiperSlide
+              className="swiper-slide"
+              onClick={() => {
+                handleClick();
+                openBookDetails(book.id);
+              }}
+            >
               <img src={`img/${book.title}.jpg`} alt="book" />
             </SwiperSlide>
           ))}

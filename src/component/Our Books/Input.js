@@ -1,4 +1,7 @@
-const Input = ({ handleChange, value, title, name, color }) => {
+import { useBooksContext } from "../../pges/OurBooks";
+
+const Input = ({ value, title, name }) => {
+  const { handleChange } = useBooksContext();
   return (
     <div className="sidebar-label-container">
       <label className="sidebar-label-container ar">{title}</label>

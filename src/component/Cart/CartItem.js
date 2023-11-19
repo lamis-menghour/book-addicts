@@ -1,11 +1,11 @@
 import { React } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import books from "../../dataBase/data";
 
 function CartItem({ id, quantity }) {
-  const { removeFromCart } = useShoppingCart();
+  const { removeFromCart, editCartItem } = useShoppingCart();
   const item = books.find((item) => item.id === id);
 
   if (item == null) return null;
@@ -16,19 +16,44 @@ function CartItem({ id, quantity }) {
       <div className="item-info">
         <h2 className="item-title">{item.title}</h2>
         <div className="item-details">
-          <p>
-            <span className="item-quantity">{quantity} {" "}</span> &times;{" "}
-            <span className="item-price">{item.price}</span> دج
-          </p>
-          <p className="item-totalPrice">
-            {quantity * item.price} دج
-            <span className="item-delete">
+          <div className="item-totalPrice">
+            <span>{quantity * item.price} دج</span>
+            <span className="item-totalPrice-details">
+              <span className="item-quantity">{quantity} </span> &times;{" "}
+              <span className="item-price">{item.price} دج</span>
+            </span>
+          </div>
+          <span className="item-icons">
+            <span className="icon">
               <FontAwesomeIcon
                 icon={faTrashAlt}
                 onClick={() => removeFromCart(item.id)}
               />
             </span>
-          </p>
+            <span className="icon">
+              <FontAwesomeIcon
+                icon={faEdit}
+                onClick={() => {
+                  // editCartItem(
+                  //   item.id,
+                  //   parseInt(prompt("Enter the new quantity:"))
+                  // )
+                  const newQuantityInput = prompt("Enter the new quantity:");
+
+                  if (
+                    !isNaN(newQuantityInput) &&
+                    newQuantityInput.trim() !== ""
+                  ) {
+                    // It's a valid number, parse it and call your editCartItem function
+                    editCartItem(item.id, parseInt(newQuantityInput, 10));
+                  } else {
+                    // It's not a valid number, handle the error or provide feedback to the user
+                    alert("Please enter a valid number for the quantity.");
+                  }
+                }}
+              />
+            </span>
+          </span>
         </div>
       </div>
     </div>

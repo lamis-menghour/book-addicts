@@ -6,9 +6,9 @@ function Favorite() {
   const { favoriteItems } = useFavoriteIcon();
 
   return (
-    <div className="cart-section">
+    <div className="favorite-section">
       {favoriteItems && favoriteItems.length > 0 ? (
-        <div className="items-container">
+        <div className="favorites-container">
           {favoriteItems.map((item) => (
             <FavoriteItem key={item.id} {...item} />
           ))}

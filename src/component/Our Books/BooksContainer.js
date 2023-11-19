@@ -1,10 +1,12 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import { useBooksContext } from "../../pges/OurBooks";
 
-function BooksContainer({ result, query, handleInputChange }) {
+function BooksContainer() {
+  const { result} = useBooksContext();
   return (
     <div className="books-section ">
-      <SearchBar query={query} handleInputChange={handleInputChange} />
+      <SearchBar />
       <div className="books-container">{result}</div>
     </div>
   );

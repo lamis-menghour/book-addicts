@@ -1,5 +1,5 @@
 import { React, useState, createContext, useContext } from "react";
-import Cart from "../pges/Cart";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 // Create Context
 const ShoppingCartContext = createContext({});
@@ -10,9 +10,7 @@ export function useShoppingCart() {
 
 // Context Provider
 export function ShoppingCartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
-
-  console.log("cartItems = ", cartItems);
+  const [cartItems, setCartItems] = useLocalStorage("shopping-cart", []);
 
   function getItemQuantity(id) {
     const item = cartItems.find((item) => item.id === id);
@@ -36,7 +34,7 @@ export function ShoppingCartProvider({ children }) {
         return currentItems.map((item) => {
           if (item.id === id) {
             return {
-              ...item,
+              id,
               quantity: item.quantity + 1,
             };
           } else {
@@ -58,7 +56,7 @@ export function ShoppingCartProvider({ children }) {
         return currentItems.map((item) => {
           if (item.id === id) {
             return {
-              ...item,
+              id,
               quantity: item.quantity - 1,
             };
           } else {
@@ -80,6 +78,14 @@ export function ShoppingCartProvider({ children }) {
     );
   }
 
+  function editCartItem(id, newQuantity) {
+    setCartItems((currentItems) =>
+      currentItems.map((item) =>
+        item.id === id ? { id, quantity: newQuantity } : item
+      )
+    );
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -87,6 +93,7 @@ export function ShoppingCartProvider({ children }) {
         increaseItemQuantity,
         decreaseItemQuantity,
         removeFromCart,
+        editCartItem,
         cartItems,
       }}
     >

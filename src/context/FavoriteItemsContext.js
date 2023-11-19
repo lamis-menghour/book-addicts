@@ -1,5 +1,5 @@
 import { React, useState, createContext, useContext } from "react";
-import Favorite from "../pges/Favorite";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 // Create Context
 const FavoriteItemsContext = createContext({});
@@ -10,31 +10,28 @@ export function useFavoriteIcon() {
 
 // Context Provider
 export function FavoriteItemsProvider({ children }) {
-  const [favoriteItems, setFavoriteItems] = useState([]);
+  const [favoriteItems, setFavoriteItems] =  useLocalStorage("favorite-books", []);
 
   console.log("favoriteItems = ", favoriteItems);
+  
 
-  function addToFavorite(id) {
-    console.log("id ", id);
-
+  function addToFavorites(id) {
     setFavoriteItems((currentItems) => {
       // Check if the item already exists in favorites
-      if (currentItems.some((item) => item.id === id)) {
-        // Item already exists, so no need to add it again
-        return currentItems;
+      const isItemInFavorites = currentItems.some((item) => item.id === id);
+  
+      if (isItemInFavorites) {
+        // Item already exists, remove it from favorites
+        return currentItems.filter((item) => item.id !== id);
+      } else {
+        // Item doesn't exist, add it to favorites
+        return [...currentItems, { id }];
       }
-
-      // Item doesn't exist, add it to favorites
-      return [
-        ...currentItems,
-        {
-          id,
-        },
-      ];
     });
+    
   }
 
-  function removeFromFavorite(id) {
+  function removeFromFavorites(id) {
     setFavoriteItems((currentItems) =>
       currentItems.filter((item) => item.id !== id)
     );
@@ -43,8 +40,8 @@ export function FavoriteItemsProvider({ children }) {
   return (
     <FavoriteItemsContext.Provider
       value={{
-        addToFavorite,
-        removeFromFavorite,
+        addToFavorites,
+        removeFromFavorites,
         favoriteItems,
       }}
     >

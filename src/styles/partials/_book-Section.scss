@@ -22,37 +22,47 @@
     border: 0.5px solid rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
     border-radius: 0 5px 5px 0;
+    background-color: var(--background-color);
+    color: var(--text-light);
   }
 
   .search-icon {
     width: 40px;
     height: 30px;
-    background-color: rgb(188, 0, 0);
+    background-color: red;
     border-radius: 5px 0 0 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
-    &:hover {
-      cursor: pointer;
-    }
+    
 
     svg {
-      color: white;
+      color: rgb(255, 255, 255);
     }
   }
 }
 
 .books-container {
-  display: grid;
-  justify-content: flex-start;
-  grid-template-columns: repeat(auto-fill, 340px);
-  grid-gap: 1.2em;
+  // display: grid;
+  // justify-content: flex-start;
+  // grid-template-columns: repeat(auto-fill, 340px);
+  // grid-gap: 1.2em;
   width: 100%;
   direction: rtl;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.2em;
 }
 
 .book-card {
+  flex: 0 0 340px; //grow shrink basis
+  // The flex property is a shorthand property for the flex-grow, flex-shrink, and flex-basis properties.
+  // The flex-grow = ينمو  property specifies how much a flex item will grow relative to the rest of the flex items.
+  // The flex-shrink = يتقلص property specifies how much a flex item will shrink relative to the rest of the flex items.
+  // The flex-basis property specifies the initial length of a flex item.
+
   background-color: var(--background-color);
   height: 180px;
   display: flex;
@@ -62,8 +72,8 @@
 
   .book-cover {
     width: 130px;
-      height: 180px;
-      padding: 10px;
+    height: 180px;
+    padding: 10px;
     img {
       width: 110px;
       height: 160px;
@@ -75,9 +85,9 @@
   .book-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-start;
-    padding: 10px 15px;
+    padding: 20px 15px;
     width: 100%;
 
     .book-title {
@@ -118,21 +128,36 @@
     }
 
     .add-to-cart {
-      svg {
-        color: var(--text-color);
-        margin-right: 10px;
-        width: 18px;
-        height: 18px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      .shopping-cart-quantity {
+        position: relative;
 
-        &:hover {
-          cursor: pointer;
-          color: var(--green);
+        .quantity {
+          position: absolute;
+          top: -0.4rem;
+          right: 0.4rem;
+          width: 15px;
+          height: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          background-color: rgb(255, 174, 0);
+          box-shadow: 0px 2px 5px var(--shadow-color);
+          color: var(--text-color);
+          z-index: 1;
+          font-size: 0.8rem;
+        }
+        .shopping-cart {
+          margin-right: 1rem;
         }
       }
     }
+  }
 
-    .view-more {
-      color: var(--green);
-    }
+  .view-more {
+    color: var(--green);
   }
 }

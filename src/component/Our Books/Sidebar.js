@@ -1,6 +1,9 @@
 import Input from "./Input";
+import { useBooksContext } from "../../pges/OurBooks";
 
-const Sidebar = ({ handleChange }) => {
+const Sidebar = () => {
+  const { handleChange } = useBooksContext();
+
   const sidebarItems = [
     {
       id: 0,
@@ -98,7 +101,6 @@ const Sidebar = ({ handleChange }) => {
             <div className="inputs">
               {item.inputs.map((input, index) => (
                 <Input
-                  handleChange={handleChange}
                   title={input.title}
                   value={input.value}
                   name={item.name}
