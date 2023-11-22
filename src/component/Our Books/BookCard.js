@@ -9,7 +9,7 @@ import { useFavoriteIcon } from "../../context/FavoriteItemsContext";
 import { useBookDetails } from "../../context/BookDetailsContext";
 
 function BookCard({ item }) {
-  const { id, title, author, pages, price } = item;
+  const { id, title, author, price } = item;
   const { getItemQuantity, increaseItemQuantity, cartItems } =
     useShoppingCart();
   const { addToFavorites, favoriteItems } = useFavoriteIcon();
@@ -35,7 +35,7 @@ function BookCard({ item }) {
   return (
     <div className="book-card">
       <div className="book-cover">
-        <img src={`/img/${title}.JPG`} />
+        <img src={`/img/${title}.JPG`} alt={title} />
       </div>
       <div className="book-info">
         <h3 className="book-title">{title}</h3>
@@ -45,9 +45,9 @@ function BookCard({ item }) {
           <span className="book-reviews">({getItemQuantity(id)})</span>
         </div> */}
 
-        <p className="book-price">
+        <div className="book-price">
           {price} دج
-          <span className="add-to-cart">
+          <div className="add-to-cart">
             <FontAwesomeIcon
               icon={isItemFavorite ? faHeartSolid : faHeartRegular}
               style={heartStyle}
@@ -68,8 +68,8 @@ function BookCard({ item }) {
                 onMouseLeave={() => setCartHovered(false)}
               />
             </div>
-          </span>
-        </p>
+          </div>
+        </div>
         <Link
           to="/إقرأ-المزيد"
           className="view-more"

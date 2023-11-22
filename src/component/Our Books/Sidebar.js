@@ -1,9 +1,6 @@
 import Input from "./Input";
-import { useBooksContext } from "../../pges/OurBooks";
 
 const Sidebar = () => {
-  const { handleChange } = useBooksContext();
-
   const sidebarItems = [
     {
       id: 0,

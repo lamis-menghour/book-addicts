@@ -32,7 +32,7 @@ function HeroSection({ handleClick }) {
       <div id="swiper-stand">
         <Swiper
           loop={true}
-          centerdSlides={true}
+          centeredSlides={false}
           spaceBetween={25}
           autoplay={{
             dalay: 5000,
@@ -52,8 +52,9 @@ function HeroSection({ handleClick }) {
           modules={[Autoplay]}
           className="books-swiper"
         >
-          {top10Books.map((book) => (
+          {top10Books.map((book, index) => (
             <SwiperSlide
+              key={index}
               className="swiper-slide"
               onClick={() => {
                 handleClick();

@@ -1,5 +1,5 @@
-import { React, useState, createContext, useContext } from "react";
-import {useLocalStorage} from "../hooks/useLocalStorage";
+import { React, createContext, useContext } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 // Create Context
 const FavoriteItemsContext = createContext({});
@@ -10,16 +10,16 @@ export function useFavoriteIcon() {
 
 // Context Provider
 export function FavoriteItemsProvider({ children }) {
-  const [favoriteItems, setFavoriteItems] =  useLocalStorage("favorite-books", []);
-
-  console.log("favoriteItems = ", favoriteItems);
-  
+  const [favoriteItems, setFavoriteItems] = useLocalStorage(
+    "favorite-books",
+    []
+  );
 
   function addToFavorites(id) {
     setFavoriteItems((currentItems) => {
       // Check if the item already exists in favorites
       const isItemInFavorites = currentItems.some((item) => item.id === id);
-  
+
       if (isItemInFavorites) {
         // Item already exists, remove it from favorites
         return currentItems.filter((item) => item.id !== id);
@@ -28,7 +28,6 @@ export function FavoriteItemsProvider({ children }) {
         return [...currentItems, { id }];
       }
     });
-    
   }
 
   function removeFromFavorites(id) {

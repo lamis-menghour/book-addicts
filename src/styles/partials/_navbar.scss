@@ -1,4 +1,4 @@
-nav {
+nav.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,7 +13,7 @@ nav {
   z-index: 99;
 
   .logo {
-    margin-left: 30px;
+    margin-left: 20px;
     img {
       width: auto;
       height: 40px;
@@ -38,6 +38,10 @@ nav {
       }
       &.logo:hover {
         background-color: transparent;
+      }
+      &.active {
+        background-color: var(--green); // Set the background color for the active link
+        color: var(--background-color); // Set the text color for the active link
       }
     }
   }

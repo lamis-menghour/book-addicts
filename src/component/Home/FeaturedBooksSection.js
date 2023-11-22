@@ -74,7 +74,7 @@ function FeaturedBooksSection() {
           }}
           modules={[Navigation]}
           spaceBetween={20}
-          centerdSlides={true}
+          centeredSlides={false}
           breakpoints={{
             0: {
               slidesPerView: 1,
@@ -95,8 +95,8 @@ function FeaturedBooksSection() {
           className="books-swiper"
         >
           {featuredBooks.map((book, index) => (
-            <SwiperSlide className="swiper-slide">
-              <FeaturedBook book={book} key={index} />
+            <SwiperSlide className="swiper-slide" key={index}>
+              <FeaturedBook book={book} />
             </SwiperSlide>
           ))}
         </Swiper>

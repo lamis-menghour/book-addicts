@@ -4,7 +4,6 @@ import { createContext, useContext, useState } from "react";
 const BookDetailsContext = createContext();
 
 export const BookDetailsProvider = ({ children }) => {
-  // const [selectedBookId, setSelectedBookId] = useState(null);
   const [selectedBookId, setSelectedBookId] = useState();
 
   const openBookDetails = (bookId) => {

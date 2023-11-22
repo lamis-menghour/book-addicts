@@ -7,8 +7,7 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useFavoriteIcon } from "../../context/FavoriteItemsContext";
 import books from "../../dataBase/data";
 import { useBookDetails } from "../../context/BookDetailsContext";
-{
-}
+
 function BookDetails({ link }) {
   const {
     getItemQuantity,
@@ -58,7 +57,7 @@ function BookDetails({ link }) {
               <span className="book-details-reviews">({BOOK.reviews}21)</span>
             </div>
 
-            <p className="book-details-price">
+            <div className="book-details-price">
               <div className="book-details-price-quantity">
                 <span className="total-price">{BOOK.price * quantity} دج </span>
                 <span className="quantity">
@@ -78,7 +77,7 @@ function BookDetails({ link }) {
                 </span>
               </div>
 
-              <span className="add-to-cart">
+              <div className="add-to-cart">
                 <FontAwesomeIcon
                   icon={isItemFavorite ? faHeartSolid : faHeartRegular}
                   style={heartStyle}
@@ -103,8 +102,8 @@ function BookDetails({ link }) {
                     onMouseLeave={() => setCartHovered(false)}
                   />
                 </div>
-              </span>
-            </p>
+              </div>
+            </div>
           </div>
           <div className="close">
             <a href={link} onClick={closeBookDetails}>

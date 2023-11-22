@@ -1,5 +1,6 @@
-import { React, useState, createContext, useContext } from "react";
+import { React, useState, createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import books from "../dataBase/data";
 
 // Create Context
 const ShoppingCartContext = createContext({});
@@ -11,6 +12,7 @@ export function useShoppingCart() {
 // Context Provider
 export function ShoppingCartProvider({ children }) {
   const [cartItems, setCartItems] = useLocalStorage("shopping-cart", []);
+  const [total, setTotal] = useState(0);
 
   function getItemQuantity(id) {
     const item = cartItems.find((item) => item.id === id);
@@ -86,6 +88,25 @@ export function ShoppingCartProvider({ children }) {
     );
   }
 
+  function getItemPrice(id) {
+    const book = books.find((book) => book.id === id);
+    return book ? book.price : 0;
+  }
+
+  useEffect(() => {
+    // Calculate the total when cartItems change
+
+    // array.reduce(callback, initialValue);
+    // The reduce function is a powerful array method in JavaScript that is used to reduce an array
+    // to a single value. It iterates over each element of the array and applies a callback function
+    // to accumulate a single result.
+
+    const newTotal = cartItems.reduce((acc, item) => {
+      return acc + item.quantity * getItemPrice(item.id);
+    }, 0);
+    setTotal(newTotal);
+  }, [cartItems]);
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -95,6 +116,8 @@ export function ShoppingCartProvider({ children }) {
         removeFromCart,
         editCartItem,
         cartItems,
+        setCartItems,
+        total,
       }}
     >
       {children}

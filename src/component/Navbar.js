@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useAuthContext } from "../context/AuthContext";
+
 function Navbar() {
+  const { isAdmin } = useAuthContext();
+  const location = useLocation();
+
   const themes = [
     {
       // light theme
@@ -41,30 +46,96 @@ function Navbar() {
     setSettings(_settings);
   }
 
-  return (
-    <nav className="navbar ar">
+  // -------------------------------
+
+  const UserNavbar = () => (
+    <nav className="navbar">
       <div className="nav-links">
-        <Link to="/" className="logo">
+        <div className="logo">
           <img src="/img/logo.png" alt="logo" />
-        </Link>
-        <Link to="/" className="nav-link active">
+        </div>
+        <Link
+          to="/"
+          className={location.pathname === "/" ? "nav-link active" : "nav-link"}
+        >
           الرئيسية
         </Link>
-        <Link to="/كتبنا" className="nav-link">
+        <Link
+          to="/كتبنا"
+          className={
+            location.pathname === "/كتبنا" ? "nav-link active" : "nav-link"
+          }
+        >
           كتبنا
         </Link>
-        <Link to="/المفضلة" className="nav-link">
+        <Link
+          to="/المفضلة"
+          className={
+            location.pathname === "/المفضلة" ? "nav-link active" : "nav-link"
+          }
+        >
           المفضلة
         </Link>
-        <Link to="/مشترياتي" className="nav-link">
+        <Link
+          to="/مشترياتي"
+          className={
+            location.pathname === "/مشترياتي" ? "nav-link active" : "nav-link"
+          }
+        >
           مشترياتي
         </Link>
       </div>
 
       <div className="nav-left">
-        <Link to="/Login" className="user">
-          <FontAwesomeIcon icon={faUser} />
+        <div className="switch">
+          <div
+            className="theme"
+            style={{
+              justifyContent: darkTheme === true ? "flex-start" : "flex-end",
+              backgroundColor: darkTheme === true ? "rgba(0, 0, 0)" : "#6a6d00",
+            }}
+            onClick={changeTheme}
+          >
+            <div className={darkTheme === true ? "dark" : "light"}></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+
+  const AdminNavbar = () => (
+    <nav className="navbar">
+      <div className="nav-links">
+        <div className="logo">
+          <img src="/img/logo.png" alt="logo" />
+        </div>
+        <Link
+          to="/admin/products"
+          className={
+            location.pathname === "/admin/products"
+              ? "nav-link active"
+              : "nav-link"
+          }
+        >
+          كتبي
         </Link>
+
+        <Link
+          to="/admin/orders"
+          className={
+            location.pathname === "/admin/orders"
+              ? "nav-link active"
+              : "nav-link"
+          }
+        >
+          طلباتي
+        </Link>
+      </div>
+
+      <div className="nav-left">
+        <div className="user">
+          <FontAwesomeIcon icon={faUser} />
+        </div>
 
         <div className="switch">
           <div
@@ -81,6 +152,8 @@ function Navbar() {
       </div>
     </nav>
   );
+
+  return <div>{isAdmin ? <AdminNavbar /> : <UserNavbar />}</div>;
 }
 
 export default Navbar;

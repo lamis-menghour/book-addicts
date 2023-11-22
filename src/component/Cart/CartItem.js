@@ -12,7 +12,11 @@ function CartItem({ id, quantity }) {
 
   return (
     <div className="item">
-      <img className="item-image" src={`/img/${item.title}.JPG`} />
+      <img
+        className="item-image"
+        src={`/img/${item.title}.JPG`}
+        alt={item.title}
+      />
       <div className="item-info">
         <h2 className="item-title">{item.title}</h2>
         <div className="item-details">
@@ -34,12 +38,7 @@ function CartItem({ id, quantity }) {
               <FontAwesomeIcon
                 icon={faEdit}
                 onClick={() => {
-                  // editCartItem(
-                  //   item.id,
-                  //   parseInt(prompt("Enter the new quantity:"))
-                  // )
                   const newQuantityInput = prompt("Enter the new quantity:");
-
                   if (
                     !isNaN(newQuantityInput) &&
                     newQuantityInput.trim() !== ""

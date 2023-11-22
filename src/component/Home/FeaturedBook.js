@@ -13,10 +13,10 @@ function FeaturedBook({ book, index }) {
     <div className="featured-book ar" key={index}>
       <div className="icons">
         <a href="#">
-          <FontAwesomeIcon icon={faEye} />{" "}
+          <FontAwesomeIcon icon={faEye} />
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faHeart} />{" "}
+          <FontAwesomeIcon icon={faHeart} />
         </a>
       </div>
       <div className="book-image">

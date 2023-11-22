@@ -4,7 +4,6 @@ import {
   faFacebook,
   faInstagram,
   faYoutube,
-  faT,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons";

@@ -41,8 +41,8 @@ function BarSection() {
 
   return (
     <div className="icons-container ar">
-      {barItems.map((item) => (
-        <div className="icons">
+      {barItems.map((item, index) => (
+        <div className="icons" key={index}>
           <FontAwesomeIcon icon={item.icon} />
           <div className="text">
             <h3>{item.title}</h3>

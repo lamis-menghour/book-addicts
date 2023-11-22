@@ -37,22 +37,22 @@ function FavoriteItem({ id }) {
   return (
     <div className="card">
       <div className="cover">
-        <img src={`/img/${title}.JPG`} />
+        <img src={`/img/${title}.JPG`} alt={title} />
       </div>
       <div className="info">
         <h3 className="title">{title}</h3>
         <p className="author">{author}</p>
 
-        <p className="price">
+        <div className="price">
           {price} دج
-          <span className="favorite-icons">
+          <div className="favorite-icons">
             <FontAwesomeIcon
               icon={faHeart}
               className="liked"
               onClick={() => removeFromFavorites(id)}
             />
             <div className="shopping-cart-quantity">
-            {quantity >0?  <p className="quantity">{quantity}</p>:null}
+              {quantity > 0 ? <p className="quantity">{quantity}</p> : null}
               <FontAwesomeIcon
                 icon={faCartShopping}
                 style={shoppingCartStyle}
@@ -62,8 +62,8 @@ function FavoriteItem({ id }) {
                 onMouseLeave={handleMouseLeave}
               />
             </div>
-          </span>
-        </p>
+          </div>
+        </div>
         <Link
           to="/إقرأ-المزيد"
           className="view-more"
